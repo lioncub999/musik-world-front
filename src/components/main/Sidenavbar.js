@@ -1,7 +1,17 @@
+import { useState } from 'react';
 import '../../css/main/Sidenavbar.css'
+import $ from 'jquery'
+import { useEffect } from 'react';
 
-function Sidenavbar() {
-    return(
+function Sidenavbar(props) {
+    const [SidebarMenu] = useState(['홈', '공지', '게시판', '룰렛', '마이페이지'])
+    const [SidebarSelected, setSidebarSelected] = useState(0)
+
+    useEffect(() => {
+        $('.nav-contents-box').eq(SidebarSelected).addClass('selected')
+    }, [SidebarSelected])
+
+    return (
         <div>
             <div className="nav-bar-box">
                 <div className="nav-bar">
@@ -10,44 +20,40 @@ function Sidenavbar() {
                         <p className="nav-log-img">로고이미지</p>
                     </div>
 
-                    <div id="nav-home" className='nav-contents-box active'>
-                        <div className="nav-contents-text">
-                            홈
-                        </div>
-                    </div>
+                    {
+                        SidebarMenu.map((a, i) => {
+                            return (
+                                <NavTitle key={i} CheckIndex={SidebarMenu} SidebarMenu={SidebarMenu[i]} setSidebarSelected={setSidebarSelected} setContentsNum={props.setContentsNum}></NavTitle>
+                            )
+                        })
+                    }
 
-                    <div id="nav-announce" className='nav-contents-box'>
-                        <div className="nav-contents-text">
-                            공지
-                        </div>
-                    </div>
-
-                    <div id="nav-board" className='nav-contents-box'>
-                        <div className="nav-contents-text">
-                            게시판
-                        </div>
-                    </div>
-
-                    <div id="nav-rullet" className='nav-contents-box'>
-                        <div className="nav-contents-text">
-                            룰렛
-                        </div>
-                    </div>
-
-                    <div id="nav-mypage" className='nav-contents-box'>
-                        <div className="nav-contents-text">
-                            마이페이지
-                        </div>
-                    </div>
-
-                    <div className="logout-btn" onClick={()=> {
-                        window.location.href = '/auth/logout'
-                    }}>
+                    <div className="logout-btn" onClick={() => { window.location.href = '/auth/logout' }}>
                         <div className="logout-text">
                             Logout
                         </div>
                     </div>
                 </div>
+
+            </div>
+        </div>
+    )
+}
+
+function NavTitle(props) {
+    return (
+        <div data-count={props.SidebarMenu} id="nav-home" className='nav-contents-box' onClick={(e) => {
+            let tg = e.currentTarget.dataset.count;
+            $('.nav-contents-box').removeClass('selected');
+            setTimeout(() => {
+                var index = props.CheckIndex.indexOf(tg);
+                $('.nav-contents-box').eq(index).addClass('selected');
+                props.setContentsNum(index);
+            }, 200);
+        }}>
+            <div className="nav-bg"></div>
+            <div className="nav-contents-text">
+                {props.SidebarMenu}
             </div>
         </div>
     )

@@ -1,4 +1,4 @@
-import '../../../css/main/Home.css'
+import '../../css/main/Home.css'
 import $ from 'jquery';
 
 function Homecontents(props) {
@@ -17,8 +17,8 @@ function Homecontents(props) {
             </div>
             <div className="contents-content">
                 <div className="login-info">
-                    <p>안녕하세요 {props.userinfo.username} 님</p>
-                    <p>잔여포인트 : <span className="balance"> {props.userinfo.userbalance}</span>포인트</p>
+                    <p>안녕하세요 {props.Userinfo.username} 님</p>
+                    <p>잔여포인트 : <span className="balance"> {props.Userinfo.userbalance}</span>포인트</p>
                 </div>
                 <div className="home-etc">
                     <div className="home-etc-box">
