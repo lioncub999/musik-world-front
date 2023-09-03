@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Girassol&display=swap");
+
 .rullet-box {
     position: relative;
     margin-top: 50px;
@@ -27,7 +29,7 @@
         "spinner"
         "trigger";
     font-family: "Girassol", sans-serif;
-    font-size: calc(var(--size) / 21);
+    font-size: calc(var(--size) / 15);
     line-height: 1;
     text-transform: lowercase;
 }
@@ -143,12 +145,12 @@
 /* Selected prize animation */
 .prize.selected .text {
     color: white;
-    animation: selected 12000ms ease;
+    animation: selected 1000ms ease;
 }
 
 @keyframes selected {
     25% {
-        transform: scale(1.25);
+        transform: scale(2.25);
         text-shadow: 1vmin 1vmin 0 hsla(0 0% 0% / 0.1);
     }
 

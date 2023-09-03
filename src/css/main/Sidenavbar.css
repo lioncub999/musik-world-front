@@ -1,4 +1,6 @@
 .nav-bar-box {
+    position: sticky;
+    top: 25px;
     width: 336px;
 
     font-size: 20px;
@@ -13,7 +15,7 @@
     left: 30px;
 
     width: 306px;
-    height: 800px;
+    height: 600px;
 
     background: #F9FAFC 0% 0% no-repeat padding-box;
     box-shadow: 3px 3px 45px #BCBDBE52;
@@ -78,7 +80,7 @@
 
 .logout-btn {
     position: relative;
-    top: 330px;
+    top: 150px;
 
     font: normal normal medium 20px/13px Spoqa Han Sans Neo;
     letter-spacing: 0px;

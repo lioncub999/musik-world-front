@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import '../../css/main/Rullet.css'
 import '../../css/main/RulletBoard.css'
 import Rullet from './components/Rullet';
@@ -6,39 +6,117 @@ import Rullet from './components/Rullet';
 
 function RulletContents() {
     useEffect(() => {
+        //1 - 10, 3 - 5. 5 - 3. 10 - 2, 20 - 1
         const prizes = [
             {
                 text: "1",
-                color: "hsl(197 30% 43%)",
+                color: "#AEB404",
                 reaction: "dancing"
-            },
-            {
-                text: "2",
-                color: "hsl(173 58% 39%)",
-                reaction: "shocked"
             },
             {
                 text: "3",
-                color: "hsl(43 74% 66%)",
-                reaction: "shocked"
-            },
-            {
-                text: "4",
-                color: "hsl(27 87% 67%)",
-                reaction: "shocked"
-            },
-            {
-                text: "5",
-                color: "hsl(12 76% 61%)",
+                color: "#31B404",
                 reaction: "dancing"
             },
             {
-                text: "6",
-                color: "hsl(350 60% 52%)",
-                reaction: "laughing"
-            }
-        ];
-
+                text: "5",
+                color: "#0404B4",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "3",
+                color: "#31B404",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "10",
+                color: "#5F04B4",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "5",
+                color: "#0404B4",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "3",
+                color: "#31B404",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "5",
+                color: "#0404B4",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "3",
+                color: "#31B404",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "10",
+                color: "#5F04B4",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "3",
+                color: "#31B404",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "20",
+                color: "#B404AE",
+                reaction: "dancing"
+            },
+            
+           
+            
+        ]
         const wheel = document.querySelector(".deal-wheel");
         const spinner = wheel.querySelector(".spinner");
         const trigger = wheel.querySelector(".btn-spin");
@@ -81,6 +159,7 @@ function RulletContents() {
         };
 
 
+        //휠 세팅
         const setupWheel = () => {
             createConicGradient();
             createPrizeNodes();
