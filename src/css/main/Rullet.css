@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Girassol&display=swap");
 
 .rullet-box {
+
+    display: flex;
+    flex-direction: column;
+
     position: relative;
     margin-top: 50px;
     left: 74px;
@@ -21,6 +25,7 @@
             hsl(var(--lg-hs) 20%) var(--lg-stop) 100%);
 
     position: relative;
+    top : 50px;
     display: grid;
     justify-content: center;
     grid-gap: calc(var(--size) / 20);

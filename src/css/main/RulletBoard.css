@@ -46,27 +46,11 @@ stroke-width: 2.5px
     fill: #fafafa
 }
 
-* {
-    box-sizing: border-box;
-  }
-  
-  body {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-  }
-  
-  select {
-    margin: 2rem auto;
-  }
-  
   svg {
     max-width: 60vmin;
     max-height: 60vmin;
     margin: auto;
   }
-  
-  
   
   /* Grim Reaper animations */
   .grim-reaper {
