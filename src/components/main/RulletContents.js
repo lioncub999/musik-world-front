@@ -7,6 +7,11 @@ import Rullet from './components/Rullet';
 function RulletContents() {
     useEffect(() => {
         //1 - 10, 3 - 5. 5 - 3. 10 - 2, 20 - 1
+        // "1" idx = 0, 3, 5, 7, 9, 11, 13, 15, 17, 19
+        // "3" idx = 1, 4, 10, 14, 18
+        // "5" idx = 2, 8, 12
+        // "10" idx = 6, 16
+        // "20" idx = 21
         const prizes = [
             {
                 text: "1",
@@ -20,7 +25,7 @@ function RulletContents() {
             },
             {
                 text: "5",
-                color: "#0404B4",
+                color: "#2E2EFE",
                 reaction: "dancing"
             },
             {
@@ -50,7 +55,7 @@ function RulletContents() {
             },
             {
                 text: "5",
-                color: "#0404B4",
+                color: "#2E2EFE",
                 reaction: "dancing"
             },
             {
@@ -70,7 +75,7 @@ function RulletContents() {
             },
             {
                 text: "5",
-                color: "#0404B4",
+                color: "#2E2EFE",
                 reaction: "dancing"
             },
             {
@@ -112,10 +117,7 @@ function RulletContents() {
                 text: "20",
                 color: "#B404AE",
                 reaction: "dancing"
-            },
-            
-           
-            
+            }
         ]
         const wheel = document.querySelector(".deal-wheel");
         const spinner = wheel.querySelector(".spinner");
@@ -196,6 +198,7 @@ function RulletContents() {
             const selected = Math.floor(rotation / prizeSlice);
             prizeNodes[selected].classList.add(selectedClass);
             reaper.dataset.reaction = prizeNodes[selected].dataset.reaction;
+            console.log(selected);
         };
 
 
@@ -240,8 +243,6 @@ function RulletContents() {
 
             <div className="contents-content">
                 <div className="rullet-box">
-
-
                     <div class="deal-wheel">
                         <ul class="spinner"></ul>
                         <figure class="cap">
@@ -251,6 +252,7 @@ function RulletContents() {
                         <button class="btn-spin">배팅</button>
                     </div>
                 </div>
+                <div className="rullet-box"></div>
             </div>
         </div>
 

@@ -2,14 +2,10 @@ body {
     margin : 0px;
     padding : 0px;
 }
-div,
-a,
-p,
-button,
-input {
+* {
     box-sizing: border-box;
-    margin: 0px;
-}
+    margin : 0px;
+  }
 
 .login-page,
 .register-page {
