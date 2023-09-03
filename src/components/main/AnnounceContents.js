@@ -3,6 +3,7 @@ function AnnounceContents() {
         <div className="contents">
             <div className="title-box">
                 <div className="title">
+                    {/* 주석 */}
                     ANNOUNCE
                 </div>
             </div>
