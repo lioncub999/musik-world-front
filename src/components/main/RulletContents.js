@@ -105,6 +105,7 @@ function RulletContents() {
                         </g>
                         <path data-animate="body" id="HOOD_FRONT" className="cls-9" d="M356 54s-100 18-131 96c-40 100 86 310 86 310s-108-45-166-137a432 432 0 01-36-71c-2-6-16 46-23 23-9-33 7-88 31-126 65-103 239-95 239-95z" />
                     </svg>
+                    {/* 주석추가 */}
                 </div>
             </div>
         </div>
