@@ -1,6 +1,6 @@
 import '../css/main/Main.css'
 import axios from "axios"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SideNavbar from '../components/main/SideNavbar';
 import HomeContents from '../components/main/HomeContents';
 import AnnounceContents from '../components/main/AnnounceContents';
@@ -10,16 +10,21 @@ import MypageContents from '../components/main/MypageContents';
 
 
 function Main() {
-    const [Userinfo, setUserinfo] = useState([])
-    const [ContentsNum, setContentsNum] = useState(0)
+    const [Userinfo, setUserinfo] = useState([]);
+    const [ContentsNum, setContentsNum] = useState(null);
 
-    axios.get('/userinfo')
+    useEffect(() => {
+        axios.get('/userinfo')
         .then((res) =>
-            setUserinfo(res.data)
+            setUserinfo(res.data),
+            setContentsNum(0)
         )
         .catch((err) => {
             console.log(err)
         })
+    }, [])
+    
+
 
     return (
         <div className='main-page'>
