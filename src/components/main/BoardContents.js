@@ -1,7 +1,14 @@
 function BoardContents() {
     return (
-        <div>
-            게시판입니다.
+        <div className="contents">
+            <div className="title-box">
+                <div className="title">
+                    BOARD
+                </div>
+            </div>
+            <div className="title-line-box">
+                <div className="title-line"></div>
+            </div>
         </div>
     )
 }

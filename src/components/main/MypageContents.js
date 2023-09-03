@@ -1,7 +1,14 @@
 function MypageContents() {
     return (
-        <div>
-            마이페이지 입니다.
+        <div className="contents">
+            <div className="title-box">
+                <div className="title">
+                    MYPAGE
+                </div>
+            </div>
+            <div className="title-line-box">
+                <div className="title-line"></div>
+            </div>
         </div>
     )
 }
