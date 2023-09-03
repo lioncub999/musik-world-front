@@ -1,11 +1,7 @@
 import '../../css/main/Home.css'
-import $ from 'jquery';
 
 function Homecontents(props) {
-    var balance = $('.balance').text()
-    balance = balance.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    $('.balance').html(balance);
-    return(
+    return (
         <div className="contents">
             <div className="title-box">
                 <div className="title">
@@ -18,7 +14,7 @@ function Homecontents(props) {
             <div className="contents-content">
                 <div className="login-info">
                     <p>안녕하세요 {props.Userinfo.username} 님</p>
-                    <p>잔여포인트 : <span className="balance"> {props.Userinfo.userbalance}</span>포인트</p>
+                    <BalanceSplit userbalance={props.Userinfo.userbalance}></BalanceSplit>
                 </div>
                 <div className="home-etc">
                     <div className="home-etc-box">
@@ -28,7 +24,7 @@ function Homecontents(props) {
                     </div>
 
                     <div className="home-etc-box" style={{
-                        marginLeft : "40px"
+                        marginLeft: "40px"
                     }}>
                         <p className="home-etc-title">
                             미니게임
@@ -39,6 +35,19 @@ function Homecontents(props) {
         </div>
 
     )
+}
+
+function BalanceSplit(props) {
+    var balance = props.userbalance;
+    if (balance == undefined) {
+        return <p>잔여포인트 : <span className="balance"> </span>포인트</p>
+
+    } else {
+        balance = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return (
+            <p>잔여포인트 : <span className="balance"> {balance}</span>포인트</p>
+        )
+    }
 }
 
 export default Homecontents;

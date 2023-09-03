@@ -48,8 +48,9 @@ function NavTitle(props) {
             setTimeout(() => {
                 var index = props.CheckIndex.indexOf(tg);
                 $('.nav-contents-box').eq(index).addClass('selected');
+                props.setContentsNum(1000);
                 props.setContentsNum(index);
-            }, 200);
+            }, 50);
         }}>
             <div className="nav-bg"></div>
             <div className="nav-contents-text">

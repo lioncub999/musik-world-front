@@ -243,13 +243,13 @@ function RulletContents() {
 
             <div className="contents-content">
                 <div className="rullet-box">
-                    <div class="deal-wheel">
-                        <ul class="spinner"></ul>
-                        <figure class="cap">
+                    <div className="deal-wheel">
+                        <ul className="spinner"></ul>
+                        <figure className="cap">
                             <Rullet></Rullet>
                         </figure>
-                        <div class="ticker"></div>
-                        <button class="btn-spin">배팅</button>
+                        <div className="ticker"></div>
+                        <button className="btn-spin">배팅~</button>
                     </div>
                 </div>
                 <div className="rullet-box"></div>
