@@ -6,8 +6,8 @@ import axios from 'axios';
 import $ from 'jquery';
 
 function RulletContents(props) {
-    const [userBatNum, setuserBatNum] = useState(null);
-    const [userbalance, setuserbalance] = useState(props.Userinfo.userbalance)
+    const [UserBatNum, setUserBatNum] = useState(null);
+    const [UserBalance, setUserBalance] = useState(props.UserInfo.userbalance)
     useEffect(() => {
         //1 - 10, 3 - 5. 5 - 3. 10 - 2, 20 - 1
         // "1" idx = 0, 3, 5, 7, 9, 11, 13, 15, 17, 19
@@ -15,6 +15,7 @@ function RulletContents(props) {
         // "5" idx = 2, 8, 12
         // "10" idx = 6, 16
         // "20" idx = 21
+        // 돌림판 구성
         const prizes = [
             {
                 text: "1",
@@ -144,18 +145,17 @@ function RulletContents(props) {
                 spinner.insertAdjacentHTML(
                     "beforeend",
                     `<li class="prize" data-reaction=${reaction} style="--rotate: ${rotation}deg">
-            <span class="text">${text}</span>
-          </li>`
+                        <span class="text">${text}</span>
+                    </li>`
                 );
             });
         };
-
 
         const createConicGradient = () => {
             spinner.setAttribute(
                 "style",
                 `background: conic-gradient(
-          from -90deg,
+            from -90deg,
           ${prizes
                     .map(({ color }, i) => `${color} 0 ${(100 / prizes.length) * (prizes.length - i)}%`)
                     .reverse()
@@ -163,7 +163,6 @@ function RulletContents(props) {
         );`
             );
         };
-
 
         //휠 세팅
         const setupWheel = () => {
@@ -198,13 +197,13 @@ function RulletContents(props) {
             tickerAnim = requestAnimationFrame(runTickerAnimation);
         };
 
+        //휠 멈출때 셀렉트된 idx값 출력
         const selectPrize = () => {
             const selected = Math.floor(rotation / prizeSlice);
             prizeNodes[selected].classList.add(selectedClass);
             reaper.dataset.reaction = prizeNodes[selected].dataset.reaction;
             console.log(selected);
         };
-
 
         //휠 버튼 클릭시 이벤트
         trigger.addEventListener("click", () => {
@@ -213,23 +212,42 @@ function RulletContents(props) {
             }
 
             var userBattingPoint = $(".batting-point").val();
-            $(".userbalance").html(parseInt(props.Userinfo.userbalance) - parseInt(userBattingPoint));
 
-            axios.post("/rullet-roll", {
-                username : props.Userinfo.username,
-                userbatting : userBattingPoint
-            })
-            .then(function(result) {
-                setuserbalance(result.data[0].userbalance);
-            })
+            //배팅값 숫자인지 확인
+            const regex = /^[0-9]+$/;
+            if (regex.test(userBattingPoint)) {
+                //숫자면 배팅값 >= 잔액 인지 확인
+                axios.post("/rullet/rullet-check", {
+                    username: props.UserInfo.username,
+                    userbatting: userBattingPoint
+                })
+                    .then(function (result) {
+                        if (result.data === "잔액부족") {
+                            alert("잔여 포인트가 부족합니다.");
+                        } else {
+                            $(".userbalance").html(parseInt(props.UserInfo.userbalance) - parseInt(userBattingPoint));
 
-            trigger.disabled = true;
-            rotation = Math.floor(Math.random() * 360 + spinertia(1000, 500));
-            prizeNodes.forEach((prize) => prize.classList.remove(selectedClass));
-            wheel.classList.add(spinClass);
-            spinner.style.setProperty("--rotate", rotation);
-            ticker.style.animation = "none";
-            runTickerAnimation();
+                            //프론트 출력값 깎고 db에서도 값 깎음
+                            axios.post("/rullet/rullet-roll", {
+                                username: props.UserInfo.username,
+                                userbatting: userBattingPoint
+                            })
+                                .then(function (result) {
+                                    setUserBalance(result.data[0].userbalance);
+                                })
+
+                            trigger.disabled = true;
+                            rotation = Math.floor(Math.random() * 360 + spinertia(2000, 1000));
+                            prizeNodes.forEach((prize) => prize.classList.remove(selectedClass));
+                            wheel.classList.add(spinClass);
+                            spinner.style.setProperty("--rotate", rotation);
+                            ticker.style.animation = "none";
+                            runTickerAnimation();
+                        }
+                    })
+            } else {
+                alert("배팅 금액을 다시 확인하세요.");
+            }
         });
 
         //휠 멤췄을때 
@@ -274,16 +292,16 @@ function RulletContents(props) {
                         width: "100%",
                         textAlign: "left"
                     }}>
-                        <p>내 잔여 포인트 : <span className='userbalance'>{userbalance}</span></p>
-                        <p>배팅 금액 : <span><input type="text" className="batting-point" /></span></p>
+                        <p>내 잔여 포인트 : <span className='userbalance'>{UserBalance}</span></p>
+                        <p>배팅 금액 : <span><input type='number' className="batting-point" /></span></p>
                         <span className="batNum">
-                            <button className="bat-1" onClick={()=>setuserBatNum(1)}>1</button>
-                            <button className="bat-3" onClick={()=>setuserBatNum(3)}>3</button>
-                            <button className="bat-5" onClick={()=>setuserBatNum(5)}>5</button>
-                            <button className="bat-10" onClick={()=>setuserBatNum(10)}>10</button>
-                            <button className="bat-20" onClick={()=>setuserBatNum(20)}>20</button>
+                            <button className="bat-1" onClick={() => setUserBatNum(1)}>1</button>
+                            <button className="bat-3" onClick={() => setUserBatNum(3)}>3</button>
+                            <button className="bat-5" onClick={() => setUserBatNum(5)}>5</button>
+                            <button className="bat-10" onClick={() => setUserBatNum(10)}>10</button>
+                            <button className="bat-20" onClick={() => setUserBatNum(20)}>20</button>
                         </span>
-                        <p>배팅 확인 : {userBatNum}<span className="userBatNum"></span></p>
+                        <p>배팅 확인 : {UserBatNum}<span className="userBatNum"></span></p>
                         <button className="btn-spin">배팅~</button>
                     </div>
                 </div>

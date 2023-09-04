@@ -13,8 +13,8 @@ function Homecontents(props) {
             </div>
             <div className="contents-content">
                 <div className="login-info">
-                    <p>안녕하세요 {props.Userinfo.username} 님</p>
-                    <BalanceSplit userbalance={props.Userinfo.userbalance}></BalanceSplit>
+                    <p>안녕하세요 {props.UserInfo.username} 님</p>
+                    <BalanceSplit UserBalance={props.UserInfo.userbalance}></BalanceSplit>
                 </div>
                 <div className="home-etc">
                     <div className="home-etc-box">
@@ -38,14 +38,14 @@ function Homecontents(props) {
 }
 
 function BalanceSplit(props) {
-    var balance = props.userbalance;
-    if (balance === undefined) {
+    var UserBalance = props.UserBalance;
+    if (UserBalance === undefined) {
         return <p>잔여포인트 : <span className="balance"> </span>포인트</p>
 
     } else {
-        balance = balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        UserBalance = UserBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return (
-            <p>잔여포인트 : <span className="balance"> {balance}</span>포인트</p>
+            <p>잔여포인트 : <span className="balance"> {UserBalance}</span>포인트</p>
         )
     }
 }

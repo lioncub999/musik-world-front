@@ -33,7 +33,7 @@ function LoginPage(props) {
                 </div>
 
                 <div className="buttons">
-                    <button className="register-btn" type='button' onClick={() => props.setcurrentpage(1)}>회원가입</button>
+                    <button className="register-btn" type='button' onClick={() => props.setCurrentPage(1)}>회원가입</button>
                 </div>
 
                 <div className="login-announce">

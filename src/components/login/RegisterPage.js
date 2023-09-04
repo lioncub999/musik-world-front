@@ -38,7 +38,7 @@ function RegisterPage(props) {
                 </div>
 
                 <div className="buttons">
-                    <button type="button" className="back-btn" onClick={() => props.setcurrentpage(0)}>돌아가기</button>
+                    <button type="button" className="back-btn" onClick={() => props.setCurrentPage(0)}>돌아가기</button>
                 </div>
 
                 <div className="login-announce">
