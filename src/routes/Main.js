@@ -10,13 +10,13 @@ import MypageContents from '../components/main/MypageContents';
 
 
 function Main() {
-    const [Userinfo, setUserinfo] = useState([]);
+    const [UserInfo, setUserInfo] = useState([]);
     const [ContentsNum, setContentsNum] = useState(null);
 
     useEffect(() => {
         axios.get('/userinfo')
         .then((res) =>
-            setUserinfo(res.data)
+            setUserInfo(res.data)
         )
         .catch((err) => {
             console.log(err)
@@ -27,12 +27,12 @@ function Main() {
         <div className='main-page'>
             <SideNavbar  setContentsNum={setContentsNum}></SideNavbar>
             {
-                ContentsNum === 0 ? <HomeContents Userinfo={Userinfo}></HomeContents> :
+                ContentsNum === 0 ? <HomeContents UserInfo={UserInfo}></HomeContents> :
                 ContentsNum === 1?  <AnnounceContents></AnnounceContents> : 
                 ContentsNum === 2 ? <BoardContents></BoardContents> :
-                ContentsNum === 3 ? <RulletContents Userinfo={Userinfo}></RulletContents> :
+                ContentsNum === 3 ? <RulletContents UserInfo={UserInfo}></RulletContents> :
                 ContentsNum === 4 ? <MypageContents></MypageContents> :
-                <HomeContents Userinfo={Userinfo}></HomeContents>
+                <HomeContents UserInfo={UserInfo}></HomeContents>
             }
         </div>
 
