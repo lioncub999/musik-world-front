@@ -4,10 +4,8 @@ import '../../css/main/RulletBoard.css'
 import Rullet from './components/Rullet';
 import axios from 'axios';
 import $ from 'jquery';
-import prizes from './components/RulletBoard.json';
 
 function RulletContents(props) {
-    
     const [userBatNum, setuserBatNum] = useState(null);
     const [userbalance, setuserbalance] = useState(props.Userinfo.userbalance)
     useEffect(() => {
@@ -17,7 +15,113 @@ function RulletContents(props) {
         // "5" idx = 2, 8, 12
         // "10" idx = 6, 16
         // "20" idx = 21
-        prizes = prizes.RulletBoard.prizes;
+        const prizes = [
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "3",
+                color: "#31B404",
+                reaction: "dancing"
+            },
+            {
+                text: "5",
+                color: "#2E2EFE",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "3",
+                color: "#31B404",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "10",
+                color: "#5F04B4",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "5",
+                color: "#2E2EFE",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "3",
+                color: "#31B404",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "5",
+                color: "#2E2EFE",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "3",
+                color: "#31B404",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "10",
+                color: "#5F04B4",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "3",
+                color: "#31B404",
+                reaction: "dancing"
+            },
+            {
+                text: "1",
+                color: "#AEB404",
+                reaction: "dancing"
+            },
+            {
+                text: "20",
+                color: "#B404AE",
+                reaction: "dancing"
+            }
+        ]
         const wheel = document.querySelector(".deal-wheel");
         const spinner = wheel.querySelector(".spinner");
         const trigger = document.querySelector(".btn-spin");
