@@ -1,11 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import '../../css/main/Rullet.css'
 import '../../css/main/RulletBoard.css'
 import Rullet from './components/Rullet';
 import axios from 'axios';
-
+import $ from 'jquery';
+import prizes from './components/RulletBoard.json';
 
 function RulletContents(props) {
+    
+    const [userBatNum, setuserBatNum] = useState(null);
+    const [userbalance, setuserbalance] = useState(props.Userinfo.userbalance)
     useEffect(() => {
         //1 - 10, 3 - 5. 5 - 3. 10 - 2, 20 - 1
         // "1" idx = 0, 3, 5, 7, 9, 11, 13, 15, 17, 19
@@ -13,113 +17,7 @@ function RulletContents(props) {
         // "5" idx = 2, 8, 12
         // "10" idx = 6, 16
         // "20" idx = 21
-        const prizes = [
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "3",
-                color: "#31B404",
-                reaction: "dancing"
-            },
-            {
-                text: "5",
-                color: "#2E2EFE",
-                reaction: "dancing"
-            },
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "3",
-                color: "#31B404",
-                reaction: "dancing"
-            },
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "10",
-                color: "#5F04B4",
-                reaction: "dancing"
-            },
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "5",
-                color: "#2E2EFE",
-                reaction: "dancing"
-            },
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "3",
-                color: "#31B404",
-                reaction: "dancing"
-            },
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "5",
-                color: "#2E2EFE",
-                reaction: "dancing"
-            },
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "3",
-                color: "#31B404",
-                reaction: "dancing"
-            },
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "10",
-                color: "#5F04B4",
-                reaction: "dancing"
-            },
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "3",
-                color: "#31B404",
-                reaction: "dancing"
-            },
-            {
-                text: "1",
-                color: "#AEB404",
-                reaction: "dancing"
-            },
-            {
-                text: "20",
-                color: "#B404AE",
-                reaction: "dancing"
-            }
-        ]
+        prizes = prizes.RulletBoard.prizes;
         const wheel = document.querySelector(".deal-wheel");
         const spinner = wheel.querySelector(".spinner");
         const trigger = document.querySelector(".btn-spin");
@@ -210,11 +108,15 @@ function RulletContents(props) {
                 reaper.dataset.reaction = "resting";
             }
 
+            var userBattingPoint = $(".batting-point").val();
+            $(".userbalance").html(parseInt(props.Userinfo.userbalance) - parseInt(userBattingPoint));
+
             axios.post("/rullet-roll", {
-                username : props.Userinfo.username
+                username : props.Userinfo.username,
+                userbatting : userBattingPoint
             })
             .then(function(result) {
-                console.log(result);
+                setuserbalance(result.data[0].userbalance);
             })
 
             trigger.disabled = true;
@@ -268,16 +170,16 @@ function RulletContents(props) {
                         width: "100%",
                         textAlign: "left"
                     }}>
-                        <p>내 잔여 포인트 : {props.Userinfo.userbalance}</p>
+                        <p>내 잔여 포인트 : <span className='userbalance'>{userbalance}</span></p>
                         <p>배팅 금액 : <span><input type="text" className="batting-point" /></span></p>
                         <span className="batNum">
-                            <button className="bat-1">1</button>
-                            <button className="bat-3">3</button>
-                            <button className="bat-5">5</button>
-                            <button className="bat-10">10</button>
-                            <button className="bat-20">20</button>
+                            <button className="bat-1" onClick={()=>setuserBatNum(1)}>1</button>
+                            <button className="bat-3" onClick={()=>setuserBatNum(3)}>3</button>
+                            <button className="bat-5" onClick={()=>setuserBatNum(5)}>5</button>
+                            <button className="bat-10" onClick={()=>setuserBatNum(10)}>10</button>
+                            <button className="bat-20" onClick={()=>setuserBatNum(20)}>20</button>
                         </span>
-                        <p>배팅 확인 : <span className="userBatNum"></span></p>
+                        <p>배팅 확인 : {userBatNum}<span className="userBatNum"></span></p>
                         <button className="btn-spin">배팅~</button>
                     </div>
                 </div>
