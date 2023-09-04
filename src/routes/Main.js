@@ -23,8 +23,6 @@ function Main() {
             console.log(err)
         })
     }, [])
-    
-
 
     return (
         <div className='main-page'>
