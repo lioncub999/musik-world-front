@@ -253,10 +253,15 @@ function RulletContents() {
                     </div>
                 </div>
                 <div className="rullet-box" style={{
-                    marginLeft : "40px",
-                    placeItems : "left"
+                    marginLeft: "40px",
                 }}>
-                    내 잔여 포인트 : 
+                    <div className="rullet-userinfo" style={{
+                        width : "100%",
+                        textAlign : "left"
+                    }}>
+                        <p>내 잔여 포인트 :</p>
+                        <p>배팅 금액 : </p>
+                    </div>
                 </div>
             </div>
         </div>

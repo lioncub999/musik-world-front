@@ -24,6 +24,8 @@
 
 .nav-logo {
     display: flex;
+    position : relative;
+    top : 20px;
     align-items: center;
     justify-content: center;
 
@@ -40,7 +42,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    top:10px;
+    top:20px;
 
     width: 306px;
     height: 62px;

@@ -7,13 +7,15 @@ function RegisterPage(props) {
     return (
         <div className="register-page">
 
-            <form action="/auth/register_process" method="POST" className='register-box' style={{
-                background: 'url(/image/logo.png)',
-                backgroundSize: '23%',
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: 'top',
-                backgroundColor: "white"
-            }}>
+            <form action="/auth/register_process" method="POST" className='register-box'>
+                <div className="logo-img" style={{
+                    background: 'url(/image/logo.png)',
+                    backgroundSize: '23%',
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: 'top',
+                    backgroundColor: "white"
+                }}>
+                </div>
 
                 <div className="login-title">
                     <p className="login-title-text">회원가입</p>

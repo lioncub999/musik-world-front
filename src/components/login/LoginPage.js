@@ -6,16 +6,18 @@ function LoginPage(props) {
     return (
         <div className="login-page">
 
-            <form action="/auth/login_process" method='POST' className='login-box' style={{
-                background : 'url(/image/logo.png)',
-                backgroundSize : '23%',
-                backgroundRepeat : "no-repeat",
-                backgroundPosition : 'top',
-                backgroundColor : "white"
-            }}>
+            <form action="/auth/login_process" method='POST' className='login-box' >
+                <div className="logo-img" style={{
+                    background: 'url(/image/logo.png)',
+                    backgroundSize: '23%',
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: 'top',
+                    backgroundColor: "white"
+                }}>
+                </div>
 
                 <div className="login-title">
-                    <p className="login-title-text">로그인</p>
+                    <p className="login-title-text"></p>
                 </div>
 
                 <div className="inputs">

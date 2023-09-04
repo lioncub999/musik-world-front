@@ -40,8 +40,14 @@ body {
     height : 700px;
 }
 
+.logo-img {
+    position: relative;
+    top: 20px;
+    height : 110px;
+}
+
 .login-title {
-    height: 87.2px;
+    height: 10px;
 }
 
 .login-title-text {
