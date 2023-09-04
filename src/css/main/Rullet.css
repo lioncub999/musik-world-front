@@ -107,7 +107,7 @@
 
 .btn-spin {
     color: hsl(0deg 0% 100%);
-    background: var(--lg);
+    background: black;
     border: none;
     font-family: inherit;
     font-size: inherit;

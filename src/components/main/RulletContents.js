@@ -121,7 +121,7 @@ function RulletContents() {
         ]
         const wheel = document.querySelector(".deal-wheel");
         const spinner = wheel.querySelector(".spinner");
-        const trigger = wheel.querySelector(".btn-spin");
+        const trigger = document.querySelector(".btn-spin");
         const ticker = wheel.querySelector(".ticker");
         const reaper = wheel.querySelector(".grim-reaper");
         const prizeSlice = 360 / prizes.length;
@@ -229,7 +229,7 @@ function RulletContents() {
         });
 
         setupWheel();
-    })
+    }, [])
     return (
         <div className="contents">
             <div className="title-box">
@@ -249,23 +249,31 @@ function RulletContents() {
                             <Rullet></Rullet>
                         </figure>
                         <div className="ticker"></div>
-                        <button className="btn-spin">배팅~</button>
+
                     </div>
                 </div>
                 <div className="rullet-box" style={{
                     marginLeft: "40px",
                 }}>
                     <div className="rullet-userinfo" style={{
-                        width : "100%",
-                        textAlign : "left"
+                        width: "100%",
+                        textAlign: "left"
                     }}>
                         <p>내 잔여 포인트 :</p>
-                        <p>배팅 금액 : </p>
+                        <p>배팅 금액 : <span><input type="text" className="batting-point" /></span></p>
+                        <span className="batNum">
+                            <button className="bat-1">1</button>
+                            <button className="bat-3">3</button>
+                            <button className="bat-5">5</button>
+                            <button className="bat-10">10</button>
+                            <button className="bat-20">20</button>
+                        </span>
+                        <p>배팅 확인 : <span className="userBatNum"></span></p>
+                        <button className="btn-spin">배팅~</button>
                     </div>
                 </div>
             </div>
         </div>
-
     )
 }
 
