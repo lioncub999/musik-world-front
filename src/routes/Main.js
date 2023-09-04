@@ -16,13 +16,12 @@ function Main() {
     useEffect(() => {
         axios.get('/userinfo')
         .then((res) =>
-            setUserinfo(res.data),
-            setContentsNum(0)
+            setUserinfo(res.data)
         )
         .catch((err) => {
             console.log(err)
         })
-    }, [])
+    }, [ContentsNum])
 
     return (
         <div className='main-page'>
@@ -31,7 +30,7 @@ function Main() {
                 ContentsNum === 0 ? <HomeContents Userinfo={Userinfo}></HomeContents> :
                 ContentsNum === 1?  <AnnounceContents></AnnounceContents> : 
                 ContentsNum === 2 ? <BoardContents></BoardContents> :
-                ContentsNum === 3 ? <RulletContents></RulletContents> :
+                ContentsNum === 3 ? <RulletContents Userinfo={Userinfo}></RulletContents> :
                 ContentsNum === 4 ? <MypageContents></MypageContents> :
                 <HomeContents Userinfo={Userinfo}></HomeContents>
             }
