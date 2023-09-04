@@ -16,8 +16,16 @@ function Sidenavbar(props) {
             <div className="nav-bar-box">
                 <div className="nav-bar">
 
-                    <div className="nav-logo">
-                        <p className="nav-log-img">로고이미지</p>
+                    <div className="nav-logo" style={{
+                            background: 'url(/image/logo.png)',
+                            backgroundSize : "60%",
+                            backgroundPosition : "center",
+                            backgroundRepeat : "no-repeat",
+                            width : "306px",
+                            height : "120px"
+
+                        
+                        }}>
                     </div>
 
                     {

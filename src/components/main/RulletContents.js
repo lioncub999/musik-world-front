@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import '../../css/main/Rullet.css'
 import '../../css/main/RulletBoard.css'
 import Rullet from './components/Rullet';
@@ -252,7 +252,12 @@ function RulletContents() {
                         <button className="btn-spin">배팅~</button>
                     </div>
                 </div>
-                <div className="rullet-box"></div>
+                <div className="rullet-box" style={{
+                    marginLeft : "40px",
+                    placeItems : "left"
+                }}>
+                    내 잔여 포인트 : 
+                </div>
             </div>
         </div>
 

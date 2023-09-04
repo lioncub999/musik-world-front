@@ -6,11 +6,13 @@ function LoginPage(props) {
     return (
         <div className="login-page">
 
-            <form action="/auth/login_process" method='POST' className='login-box'>
-                
-                <div className="logo">
-                    <p className="logo-img">로고이미지</p>
-                </div>
+            <form action="/auth/login_process" method='POST' className='login-box' style={{
+                background : 'url(/image/logo.png)',
+                backgroundSize : '23%',
+                backgroundRepeat : "no-repeat",
+                backgroundPosition : 'top',
+                backgroundColor : "white"
+            }}>
 
                 <div className="login-title">
                     <p className="login-title-text">로그인</p>
@@ -19,9 +21,9 @@ function LoginPage(props) {
                 <div className="inputs">
                     <input type="text" className="id-input" name='username' placeholder='이름' required />
                 </div>
-                
+
                 <div className="inputs">
-                    <input type="password" name='userpw' placeholder='비밀번호' required style={{ top: "32px"}} />
+                    <input type="password" name='userpw' placeholder='비밀번호' required style={{ top: "32px" }} />
                 </div>
 
                 <div className="buttons" style={{ height: "100px" }}>
@@ -29,7 +31,7 @@ function LoginPage(props) {
                 </div>
 
                 <div className="buttons">
-                    <button className="register-btn" type='button' onClick={() =>props.setcurrentpage(1)}>회원가입</button>
+                    <button className="register-btn" type='button' onClick={() => props.setcurrentpage(1)}>회원가입</button>
                 </div>
 
                 <div className="login-announce">
@@ -37,7 +39,7 @@ function LoginPage(props) {
                         <FontAwesomeIcon icon={faLock} className='icons' /><span>&nbsp;열심히 개발중이에요~</span>
                     </div>
                 </div>
-                
+
             </form>
         </div>
     )

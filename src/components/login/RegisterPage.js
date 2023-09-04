@@ -7,11 +7,13 @@ function RegisterPage(props) {
     return (
         <div className="register-page">
 
-            <form action="/auth/register_process" method="POST" className='register-box'>
-
-                <div className="logo">
-                    <p className="logo-img">로고이미지</p>
-                </div>
+            <form action="/auth/register_process" method="POST" className='register-box' style={{
+                background: 'url(/image/logo.png)',
+                backgroundSize: '23%',
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: 'top',
+                backgroundColor: "white"
+            }}>
 
                 <div className="login-title">
                     <p className="login-title-text">회원가입</p>
@@ -23,7 +25,7 @@ function RegisterPage(props) {
 
                 <div className="inputs">
                     <input type="password" name='userpw' placeholder='비밀번호' required style={{ top: "32px" }} />
-                    </div>
+                </div>
 
                 <div className="inputs">
                     <input type="password" name='userpw2' placeholder='비밀번호 확인' required style={{ top: "32px" }} />

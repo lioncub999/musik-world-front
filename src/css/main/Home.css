@@ -1,6 +1,5 @@
 .contents {
     width: 1300px;
-    height: 900px;
 }
 
 .title-box {
@@ -33,10 +32,6 @@
     width: 1200px;
     border: 0.5px solid #858585;
     opacity: 1;
-}
-
-.contents-content {
-    height: 700px;
 }
 
 .login-info {

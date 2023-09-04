@@ -1,7 +1,7 @@
 .nav-bar-box {
     position: sticky;
-    top: 25px;
     width: 336px;
+    top : 0px;
 
     font-size: 20px;
     letter-spacing: -0.4px;
@@ -15,7 +15,7 @@
     left: 30px;
 
     width: 306px;
-    height: 600px;
+    height: 650px;
 
     background: #F9FAFC 0% 0% no-repeat padding-box;
     box-shadow: 3px 3px 45px #BCBDBE52;
@@ -28,6 +28,7 @@
     justify-content: center;
 
     height: 70px;
+    z-index: 1000;
 }
 
 .nav-logo-img {
@@ -39,7 +40,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    top: 50px;
+    top:10px;
 
     width: 306px;
     height: 62px;
