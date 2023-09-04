@@ -2,9 +2,10 @@ import { useEffect } from 'react';
 import '../../css/main/Rullet.css'
 import '../../css/main/RulletBoard.css'
 import Rullet from './components/Rullet';
+import axios from 'axios';
 
 
-function RulletContents() {
+function RulletContents(props) {
     useEffect(() => {
         //1 - 10, 3 - 5. 5 - 3. 10 - 2, 20 - 1
         // "1" idx = 0, 3, 5, 7, 9, 11, 13, 15, 17, 19
@@ -147,6 +148,7 @@ function RulletContents() {
             });
         };
 
+
         const createConicGradient = () => {
             spinner.setAttribute(
                 "style",
@@ -208,6 +210,13 @@ function RulletContents() {
                 reaper.dataset.reaction = "resting";
             }
 
+            axios.post("/rullet-roll", {
+                username : props.Userinfo.username
+            })
+            .then(function(result) {
+                console.log(result);
+            })
+
             trigger.disabled = true;
             rotation = Math.floor(Math.random() * 360 + spinertia(1000, 500));
             prizeNodes.forEach((prize) => prize.classList.remove(selectedClass));
@@ -259,7 +268,7 @@ function RulletContents() {
                         width: "100%",
                         textAlign: "left"
                     }}>
-                        <p>내 잔여 포인트 :</p>
+                        <p>내 잔여 포인트 : {props.Userinfo.userbalance}</p>
                         <p>배팅 금액 : <span><input type="text" className="batting-point" /></span></p>
                         <span className="batNum">
                             <button className="bat-1">1</button>
