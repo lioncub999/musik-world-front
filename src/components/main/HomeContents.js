@@ -39,7 +39,7 @@ function Homecontents(props) {
 
 function BalanceSplit(props) {
     var balance = props.userbalance;
-    if (balance == undefined) {
+    if (balance === undefined) {
         return <p>잔여포인트 : <span className="balance"> </span>포인트</p>
 
     } else {

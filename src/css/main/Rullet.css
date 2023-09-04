@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Girassol&display=swap");
 
 .rullet-box {
-
     display: flex;
     flex-direction: column;
+    float: left;
 
     position: relative;
     margin-top: 50px;

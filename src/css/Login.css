@@ -7,6 +7,7 @@ body {
     margin : 0px;
   }
 
+
 .login-page,
 .register-page {
     display: flex;
@@ -39,17 +40,14 @@ body {
     height : 700px;
 }
 
-.logo {
-    height: 63.8px;
-}
-
 .logo-img {
     position: relative;
-    top: 30px;
+    top: 20px;
+    height : 110px;
 }
 
 .login-title {
-    height: 87.2px;
+    height: 10px;
 }
 
 .login-title-text {
