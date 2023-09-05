@@ -123,6 +123,8 @@ function RulletContents(props) {
                 reaction: "dancing"
             }
         ]
+        var SelectedNum;
+        var userBattingNum;
         const wheel = document.querySelector(".deal-wheel");
         const spinner = wheel.querySelector(".spinner");
         const trigger = document.querySelector(".btn-spin");
@@ -202,7 +204,18 @@ function RulletContents(props) {
             const selected = Math.floor(rotation / prizeSlice);
             prizeNodes[selected].classList.add(selectedClass);
             reaper.dataset.reaction = prizeNodes[selected].dataset.reaction;
-            console.log(selected);
+
+            if (selected == 0 || selected == 3 || selected == 5 || selected == 7 || selected == 9 || selected == 11 || selected == 13 || selected == 15 || selected == 17) {
+                SelectedNum = 1;
+            } else if (selected == 1 || selected == 4 || selected == 10 || selected == 14 || selected == 18) {
+                SelectedNum = 3;
+            } else if (selected == 2 || selected == 8 || selected == 12) {
+                SelectedNum = 5;
+            } else if (selected == 6 || selected == 16) {
+                SelectedNum = 10;
+            } else if (selected == 21) {
+                SelectedNum = 20;
+            }
         };
 
         //휠 버튼 클릭시 이벤트
@@ -210,8 +223,16 @@ function RulletContents(props) {
             if (reaper.dataset.reaction !== "resting") {
                 reaper.dataset.reaction = "resting";
             }
+            trigger.disabled = true;
+            rotation = Math.floor(Math.random() * 360 + spinertia(2000, 1000));
+            prizeNodes.forEach((prize) => prize.classList.remove(selectedClass));
+            wheel.classList.add(spinClass);
+            spinner.style.setProperty("--rotate", rotation);
+            ticker.style.animation = "none";
+            runTickerAnimation();
 
             var userBattingPoint = $(".batting-point").val();
+            userBattingNum = $('.userBatting').text();
 
             //배팅값 숫자인지 확인
             const regex = /^[0-9]+$/;
@@ -235,14 +256,6 @@ function RulletContents(props) {
                                 .then(function (result) {
                                     setUserBalance(result.data[0].userbalance);
                                 })
-
-                            trigger.disabled = true;
-                            rotation = Math.floor(Math.random() * 360 + spinertia(2000, 1000));
-                            prizeNodes.forEach((prize) => prize.classList.remove(selectedClass));
-                            wheel.classList.add(spinClass);
-                            spinner.style.setProperty("--rotate", rotation);
-                            ticker.style.animation = "none";
-                            runTickerAnimation();
                         }
                     })
             } else {
@@ -257,9 +270,13 @@ function RulletContents(props) {
             trigger.focus();
             rotation %= 360;
             selectPrize();
+            if (SelectedNum == userBattingNum) {
+            }
+            console.log(SelectedNum);
             wheel.classList.remove(spinClass);
             spinner.style.setProperty("--rotate", rotation);
         });
+
 
         setupWheel();
     }, [])
@@ -301,7 +318,7 @@ function RulletContents(props) {
                             <button className="bat-10" onClick={() => setUserBatNum(10)}>10</button>
                             <button className="bat-20" onClick={() => setUserBatNum(20)}>20</button>
                         </span>
-                        <p>배팅 확인 : {UserBatNum}<span className="userBatNum"></span></p>
+                        <p>배팅 확인 : <span className="userBatting">{UserBatNum}</span></p>
                         <button className="btn-spin">배팅~</button>
                     </div>
                 </div>
