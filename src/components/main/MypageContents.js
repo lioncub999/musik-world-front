@@ -9,6 +9,9 @@ function MypageContents() {
             <div className="title-line-box">
                 <div className="title-line"></div>
             </div>
+            <div className="mypage-box">
+                
+            </div>
         </div>
     )
 }

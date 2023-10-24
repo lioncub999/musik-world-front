@@ -205,15 +205,15 @@ function RulletContents(props) {
             prizeNodes[selected].classList.add(selectedClass);
             reaper.dataset.reaction = prizeNodes[selected].dataset.reaction;
 
-            if (selected == 0 || selected == 3 || selected == 5 || selected == 7 || selected == 9 || selected == 11 || selected == 13 || selected == 15 || selected == 17) {
+            if (selected === 0 || selected === 3 || selected === 5 || selected === 7 || selected === 9 || selected === 11 || selected === 13 || selected === 15 || selected === 17) {
                 SelectedNum = 1;
-            } else if (selected == 1 || selected == 4 || selected == 10 || selected == 14 || selected == 18) {
+            } else if (selected === 1 || selected === 4 || selected === 10 || selected === 14 || selected === 18) {
                 SelectedNum = 3;
-            } else if (selected == 2 || selected == 8 || selected == 12) {
+            } else if (selected === 2 || selected === 8 || selected === 12) {
                 SelectedNum = 5;
-            } else if (selected == 6 || selected == 16) {
+            } else if (selected === 6 || selected === 16) {
                 SelectedNum = 10;
-            } else if (selected == 21) {
+            } else if (selected === 21) {
                 SelectedNum = 20;
             }
         };

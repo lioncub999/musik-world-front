@@ -9,6 +9,9 @@ function BoardContents() {
             <div className="title-line-box">
                 <div className="title-line"></div>
             </div>
+            <div className="board-box">
+                
+            </div>
         </div>
     )
 }

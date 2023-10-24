@@ -1,3 +1,3 @@
-rm -r ../musik-world-node/front/musik-world/build
+rm -r ../musik-world-back/build
 
-yes|cp -i -f  -a -p -v build ../musik-world-node/front/musik-world/
+yes|cp -i -f  -a -p -v build ../musik-world-back/build/

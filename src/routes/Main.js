@@ -28,7 +28,7 @@ function Main() {
             <SideNavbar  setContentsNum={setContentsNum}></SideNavbar>
             {
                 ContentsNum === 0 ? <HomeContents UserInfo={UserInfo}></HomeContents> :
-                ContentsNum === 1?  <AnnounceContents></AnnounceContents> : 
+                ContentsNum === 1 ? <AnnounceContents></AnnounceContents> : 
                 ContentsNum === 2 ? <BoardContents></BoardContents> :
                 ContentsNum === 3 ? <RulletContents UserInfo={UserInfo}></RulletContents> :
                 ContentsNum === 4 ? <MypageContents></MypageContents> :
