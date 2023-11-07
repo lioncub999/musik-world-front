@@ -5,9 +5,9 @@ import RegisterPage from '../components/login/RegisterPage';
 import { useState } from 'react';
 
 function Login() {
-        const [CurrentPage, setCurrentPage] = useState(0);
+        const [currentPage, setCurrentPage] = useState(0);
 
-        switch (CurrentPage) {
+        switch (currentPage) {
             case 1:
                 return <RegisterPage setCurrentPage={setCurrentPage}></RegisterPage>
             default:

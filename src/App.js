@@ -2,6 +2,7 @@ import { Routes, Route, Link } from 'react-router-dom'
 import Login from './routes/Login'
 import Main from './routes/Main'
 import NotFound from './routes/NotFound';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

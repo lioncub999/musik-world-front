@@ -41,7 +41,7 @@ function LoginPage(props) {
                         <FontAwesomeIcon icon={faLock} className='icons' /><span>&nbsp;열심히 개발중이에요~</span>
                         <br></br>
                         <br></br>
-                        <FontAwesomeIcon icon={faLock} className='icons' /><span>&nbsp;PC화면에 최적화 되어있습니다.</span>
+                        <FontAwesomeIcon icon={faLock} className='icons' /><span>&nbsp;아직 PC화면에 최적화 되어있습니다.</span>
                     </div>
                 </div>
 
