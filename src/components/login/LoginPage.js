@@ -6,7 +6,7 @@ function LoginPage(props) {
     return (
         <div className="login-page">
 
-            <form action="/auth/login_process" method='POST' className='login-box' >
+            <form action="/api/auth/login_process" method='POST' className='login-box' >
                 <div className="logo-img" style={{
                     background: 'url(/image/logo.png)',
                     backgroundSize: '23%',
@@ -21,11 +21,11 @@ function LoginPage(props) {
                 </div>
 
                 <div className="inputs">
-                    <input type="text" className="id-input" name='username' placeholder='이름' required />
+                    <input type="text" className="id-input" name='userNm' placeholder='이름' required />
                 </div>
 
                 <div className="inputs">
-                    <input type="password" name='userpw' placeholder='비밀번호' required  />
+                    <input type="password" name='userPw' placeholder='비밀번호' required  />
                 </div>
 
                 <div className="buttons" style={{ height: "100px" }}>

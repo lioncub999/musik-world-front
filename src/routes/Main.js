@@ -9,30 +9,31 @@ import RulletContents from '../components/main/RulletContents';
 import MypageContents from '../components/main/MypageContents';
 
 
+
 function Main() {
-    const [UserInfo, setUserInfo] = useState([]);
-    const [ContentsNum, setContentsNum] = useState(null);
+    const [userInfo, setUserInfo] = useState([]);
+    const [contentsNum, setContentsNum] = useState(0);
 
     useEffect(() => {
-        axios.get('/userinfo')
+        axios.get('/api/userinfo')
         .then((res) =>
-            setUserInfo(res.data)
+            setUserInfo(res.data[0])
         )
         .catch((err) => {
             console.log(err)
         })
-    }, [ContentsNum])
+    }, [])
 
     return (
         <div className='main-page'>
             <SideNavbar  setContentsNum={setContentsNum}></SideNavbar>
             {
-                ContentsNum === 0 ? <HomeContents UserInfo={UserInfo}></HomeContents> :
-                ContentsNum === 1 ? <AnnounceContents></AnnounceContents> : 
-                ContentsNum === 2 ? <BoardContents></BoardContents> :
-                ContentsNum === 3 ? <RulletContents UserInfo={UserInfo}></RulletContents> :
-                ContentsNum === 4 ? <MypageContents></MypageContents> :
-                <HomeContents UserInfo={UserInfo}></HomeContents>
+                contentsNum === 0 ? <HomeContents userInfo={userInfo}></HomeContents> :
+                contentsNum === 1 ? <AnnounceContents></AnnounceContents> : 
+                contentsNum === 2 ? <BoardContents></BoardContents> :
+                contentsNum === 3 ? <RulletContents userInfo={userInfo}></RulletContents> :
+                contentsNum === 4 ? <MypageContents></MypageContents> :
+                <HomeContents userInfo={userInfo}></HomeContents>
             }
         </div>
 

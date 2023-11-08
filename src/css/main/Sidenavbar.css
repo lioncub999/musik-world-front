@@ -1,7 +1,7 @@
 .nav-bar-box {
     position: sticky;
     width: 336px;
-    top : 0px;
+    top: 0px;
 
     font-size: 20px;
     letter-spacing: -0.4px;
@@ -24,8 +24,8 @@
 
 .nav-logo {
     display: flex;
-    position : relative;
-    top : 20px;
+    position: relative;
+    top: 20px;
     align-items: center;
     justify-content: center;
 
@@ -42,7 +42,7 @@
     display: flex;
     align-items: center;
     position: relative;
-    top:20px;
+    top: 20px;
 
     width: 306px;
     height: 62px;
@@ -89,3 +89,15 @@
     letter-spacing: 0px;
     color: #707070;
 }
+
+.nav-contents-box:hover {
+    .nav-contents-text {
+        color: white;
+    }
+
+    .nav-bg {
+        opacity: 1;
+        transition: all 0.5s ease-in-out;
+    }
+}
+

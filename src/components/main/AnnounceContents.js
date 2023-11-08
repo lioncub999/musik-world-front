@@ -1,57 +1,78 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Pagination from 'react-bootstrap/Pagination';
+import AnnounceTable from "../AnnounceTable";
+
 function AnnounceContents() {
-    return (
-        <div className="contents">
-            <div className="title-box">
-                <div className="title">
-                    ANNOUNCE
+
+    const [announceList, setAnnounceList] = useState([])
+
+    const [totalAnnounce, setTotalAnnounce] = useState(0)
+    const [selectRangeStart, setSelectRangeStart] = useState(1)
+    const [selectRangeEnd, setSelectRangeEnd] = useState(10)
+
+    const [pageActive, setPageActive] = useState(1)
+
+    let items = [];
+
+    for (let number = 1; number <= Math.ceil(totalAnnounce / 10); number++) {
+        items.push(
+            <Pagination.Item key={number} active={number === pageActive} onClick={function () {
+                setPageActive(number)
+                setSelectRangeStart(number * 10 - 9)
+                setSelectRangeEnd(number * 10)
+            }}>
+                {number}
+            </Pagination.Item>,
+        );
+
+    }
+
+
+    useEffect(() => {
+        axios.get('/api/announce', {
+        })
+            .then((result) => {
+                setTotalAnnounce(result.data[0].TOTAL_ANNOUNCE)
+            })
+
+    }, [])
+
+
+    useEffect(() => {
+        axios.post('/api/announce/paging', {
+            selectRangeStart: selectRangeStart,
+            selectRangeEnd: selectRangeEnd
+        })
+            .then((result) => {
+                setAnnounceList(result.data)
+                console.log(result.data)
+            })
+
+    }, [pageActive])
+
+    if (announceList.length > 0 && totalAnnounce > 0) {
+        return (
+            <div className="contents">
+                <div className="title-box">
+                    <div className="title">
+                        ANNOUNCE
+                    </div>
                 </div>
-            </div>
-            <div className="title-line-box">
-                <div className="title-line"></div>
-            </div>
-            <div className="announce-box">
-                <table className="announce-tb" style={{
-                    tableLayout: "fixed",
-                    width: "100%",
+                <div className="title-line-box">
+                    <div className="title-line"></div>
+                </div>
+                <div className="announce-box" style={{
+                    textAlign: "center"
                 }}>
-                    <thead style={{
-                        borderBottom: "1px solid black"
-                    }}>
-                        <tr>
-                            <th style={{
-                                width : "10%"
-                            }}>#</th>
-                            <th style={{
-                                width : "50%"
-                            }}>제목</th>
-                            <th style={{
-                                width : "20%"
-                            }}>작성일</th>
-                            <th style={{
-                                width : "20%"
-                            }}>수정일</th>
-                            <th style={{
-                                width : "10%"
-                            }}>작성자</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr style={{
-                            borderBottom: "1px solid black",
-                            height : "40px"
-                        }}>
-                            <td>1</td>
-                            <td>제목 TEST</td>
-                            <td>작성일 TEST</td>
-                            <td>수정일 TEST</td>
-                            <td>작성자 TEST</td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
+                    <AnnounceTable announceList={announceList}></AnnounceTable>
+                    <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
+                </div>
+
             </div>
-        </div>
-    )
+
+        )
+    }
 }
 
 export default AnnounceContents;
