@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Pagination from 'react-bootstrap/Pagination';
 import AnnounceTable from "./components/AnnounceTable";
 import { Button } from "react-bootstrap";
+import AnnounceModal from "./AnnounceModal";
 
 function AnnounceContents() {
 
@@ -52,27 +53,29 @@ function AnnounceContents() {
 
     if (announceList.length > 0 && totalAnnounce > 0) {
         return (
-            <div className="contents">
-                <div className="title-box">
-                    <div className="title">
-                        ANNOUNCE
+            <>
+                <AnnounceModal></AnnounceModal>
+                <div className="contents" style={{zIndex : "-1"}}>
+                    <div className="title-box">
+                        <div className="title">
+                            ANNOUNCE
+                        </div>
                     </div>
-                </div>
-                <div className="title-line-box">
-                    <div className="title-line"></div>
-                </div>
-                <div className="announce-box" style={{
-                    textAlign: "center"
-                }}>
-                    <div className="create-announce" style={{textAlign:"center"}}>
-                        <Button>글쓰기</Button>
+                    <div className="title-line-box">
+                        <div className="title-line"></div>
                     </div>
-                    <AnnounceTable announceList={announceList}></AnnounceTable>
-                    <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
+                    <div className="announce-box" style={{
+                        textAlign: "center"
+                    }}>
+                        <div className="create-announce" style={{ textAlign: "center" }}>
+                            <Button>글쓰기</Button>
+                        </div>
+                        <AnnounceTable announceList={announceList}></AnnounceTable>
+                        <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
+                    </div>
+
                 </div>
-
-            </div>
-
+            </>
         )
     }
 }
