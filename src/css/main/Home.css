@@ -114,3 +114,8 @@
     width: 1200px;
     height: 600px;
 }
+
+.announce-title:hover {
+    color : blue;
+    text-decoration: underline;
+}

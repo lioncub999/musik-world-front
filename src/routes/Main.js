@@ -28,7 +28,7 @@ function Main() {
         <div className='main-page'>
             <SideNavbar  setContentsNum={setContentsNum}></SideNavbar>
             {
-                contentsNum === 0 ? <HomeContents userInfo={userInfo}></HomeContents> :
+                contentsNum === 0 ? <HomeContents userInfo={userInfo} setContentsNum={setContentsNum}></HomeContents> :
                 contentsNum === 1 ? <AnnounceContents></AnnounceContents> : 
                 contentsNum === 2 ? <BoardContents></BoardContents> :
                 contentsNum === 3 ? <RulletContents userInfo={userInfo}></RulletContents> :

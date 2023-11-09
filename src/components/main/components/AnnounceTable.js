@@ -1,3 +1,4 @@
+import axios from "axios";
 
 function AnnounceTable(props) {
 
@@ -42,7 +43,17 @@ function AnnounceTable(props) {
                                             height: "40px"
                                         }} key={i}>
                                             <td>{props.announceList[i].AN_ID}</td>
-                                            <td style={{ textAlign: "left" }}>{props.announceList[i].AN_TITLE}</td>
+                                            <td style={{ 
+                                                textAlign: "left",
+                                                cursor : "pointer"
+                                                }}
+                                                className="announce-title"
+                                                onClick={function() {
+                                                    axios.post('/api/announce/showAnContents', {
+                                                        announceId : {i}
+                                                    })
+                                                }}
+                                                >{props.announceList[i].AN_TITLE}</td>
                                             <td>{props.announceList[i].REGR_DTTM}</td>
                                             <td>{props.announceList[i].CHGR_DTTM}</td>
                                             <td>{props.announceList[i].REGR_ID}</td>

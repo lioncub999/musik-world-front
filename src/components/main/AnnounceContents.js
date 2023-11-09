@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Pagination from 'react-bootstrap/Pagination';
-import AnnounceTable from "../AnnounceTable";
+import AnnounceTable from "./components/AnnounceTable";
+import { Button } from "react-bootstrap";
 
 function AnnounceContents() {
 
@@ -28,7 +29,6 @@ function AnnounceContents() {
 
     }
 
-
     useEffect(() => {
         axios.get('/api/announce', {
         })
@@ -37,7 +37,6 @@ function AnnounceContents() {
             })
 
     }, [])
-
 
     useEffect(() => {
         axios.post('/api/announce/paging', {
@@ -65,6 +64,9 @@ function AnnounceContents() {
                 <div className="announce-box" style={{
                     textAlign: "center"
                 }}>
+                    <div className="create-announce" style={{textAlign:"center"}}>
+                        <Button>글쓰기</Button>
+                    </div>
                     <AnnounceTable announceList={announceList}></AnnounceTable>
                     <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
                 </div>
