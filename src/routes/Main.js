@@ -29,7 +29,7 @@ function Main() {
             <SideNavbar  setContentsNum={setContentsNum}></SideNavbar>
             {
                 contentsNum === 0 ? <HomeContents userInfo={userInfo} setContentsNum={setContentsNum}></HomeContents> :
-                contentsNum === 1 ? <AnnounceContents></AnnounceContents> : 
+                contentsNum === 1 ? <AnnounceContents userInfo={userInfo}></AnnounceContents> : 
                 contentsNum === 2 ? <BoardContents></BoardContents> :
                 contentsNum === 3 ? <RulletContents userInfo={userInfo}></RulletContents> :
                 contentsNum === 4 ? <MypageContents></MypageContents> :

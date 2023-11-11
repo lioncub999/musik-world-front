@@ -1,11 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Pagination from 'react-bootstrap/Pagination';
-import AnnounceTable from "./components/AnnounceTable";
+import AnnounceTable from "./components/Announce/AnnounceTable";
 import { Button } from "react-bootstrap";
-import AnnounceModal from "./AnnounceModal";
+import AnnounceModal from "./components/Announce/AnnounceModal";
+import AnnounceNew from "./components/Announce/AnnounceNew";
 
-function AnnounceContents() {
+function AnnounceContents(props) {
 
     const [pageAnnounceList, setPageAnnounceList] = useState([])
 
@@ -21,27 +22,8 @@ function AnnounceContents() {
 
     const [showModal, setShowModal] = useState(false);
 
-    const modalESC = () => {
-        // your logic here
-        setShowModal(false)
-    };
+    const [anNewPage, setAnNewPage] = useState(false);
 
-    useEffect(() => {
-        const keyDownHandler = event => {
-            if (event.key === 'Escape') {
-                event.preventDefault();
-
-                // 👇️ your logic here
-                modalESC();
-            }
-        };
-
-        document.addEventListener('keydown', keyDownHandler);
-
-        return () => {
-            document.removeEventListener('keydown', keyDownHandler);
-        };
-    }, []);
 
 
     for (let number = 1; number <= Math.ceil(totalAnnounceCnt / 10); number++) {
@@ -73,7 +55,6 @@ function AnnounceContents() {
         })
             .then((result) => {
                 setPageAnnounceList(result.data)
-                console.log(pageAnnounceList)
             })
 
     }, [pageActive])
@@ -81,10 +62,11 @@ function AnnounceContents() {
     if (pageAnnounceList.length > 0 && totalAnnounceCnt > 0) {
         return (
             <>
-                {showModal ? <AnnounceModal 
-                setShowModal={setShowModal}
-                anModalNum = {anModalNum}
-                pageAnnounceList = {pageAnnounceList}
+                {showModal ? <AnnounceModal
+                    setShowModal={setShowModal}
+                    anModalNum={anModalNum}
+                    pageAnnounceList={pageAnnounceList}
+                    userInfo={props.userInfo}
                 ></AnnounceModal> : null}
                 <div className="contents" style={{ zIndex: "1" }}>
                     <div className="title-box">
@@ -98,16 +80,27 @@ function AnnounceContents() {
                     <div className="announce-box" style={{
                         textAlign: "center"
                     }}>
-                        <div className="create-announce" style={{ textAlign: "left" }}>
-                            <Button>글쓰기</Button>
-                        </div>
-                        <AnnounceTable
-                            pageAnnounceList={pageAnnounceList}
-                            setShowModal={setShowModal}
-                            setAnModalNum={setAnModalNum}></AnnounceTable>
-                        <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
-                    </div>
 
+                        {anNewPage ? <AnnounceNew
+                            userInfo={props.userInfo}
+                            setAnNewPage={setAnNewPage}
+                        ></AnnounceNew> :
+                            <>
+                                {props.userInfo.USER_ROLE >= 2 ?
+                                    <div className="create-announce" style={{ textAlign: "left" }}>
+                                        <Button onClick={function () {
+                                            setAnNewPage(true)
+                                        }}>글쓰기</Button>
+                                    </div>
+                                    : null}
+
+                                <AnnounceTable
+                                    pageAnnounceList={pageAnnounceList}
+                                    setShowModal={setShowModal}
+                                    setAnModalNum={setAnModalNum}></AnnounceTable>
+                                <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
+                            </>}
+                    </div>
                 </div>
             </>
         )

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import '../../css/main/Home.css'
 import axios from 'axios'
-import HomeAnnounce from './components/HomeAnnounce'
-import AnnounceModal from './AnnounceModal'
+import HomeAnnounce from './components/Announce/HomeAnnounce'
+import AnnounceModal from './components/Announce/AnnounceModal'
 
 function Homecontents(props) {
 
@@ -29,6 +29,7 @@ function Homecontents(props) {
                 pageAnnounceList={homeAnnounceList}
                 anModalNum={anModalNum}
                 setShowModal={setShowModal}
+                userInfo={props.userInfo}
                 ></AnnounceModal> : null}
                
                 <div className="title-box">
@@ -53,6 +54,7 @@ function Homecontents(props) {
                                 homeAnnounceList={homeAnnounceList}
                                 setAnModalNum={setAnModalNum}
                                 setShowModal={setShowModal}
+                                userInfo={props.userInfo}
                             ></HomeAnnounce>
                         </div>
 

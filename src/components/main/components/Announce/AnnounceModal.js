@@ -1,7 +1,31 @@
 import { Button } from 'react-bootstrap'
-import '../../css/main/AnnounceModal.css'
+import '../../../../css/main/AnnounceModal.css'
+import { useEffect } from 'react';
+import axios from 'axios';
 
 function AnnounceModal(props) {
+
+    const modalESC = () => {
+        // your logic here
+        props.setShowModal(false)
+    };
+
+    useEffect(() => {
+        const keyDownHandler = event => {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+
+                // 👇️ your logic here
+                modalESC();
+            }
+        };
+
+        document.addEventListener('keydown', keyDownHandler);
+
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        };
+    }, []);
 
     return (
         <div className="announce-modal-box" onClick={function () {
@@ -21,7 +45,7 @@ function AnnounceModal(props) {
                     <h5 style={{
                         textAlign: "left",
                         paddingLeft: "50px",
-                        height : "40px"
+                        height: "40px"
                     }}>작성자 : {props.pageAnnounceList[props.anModalNum].REGR_ID}</h5>
                     <div className="announce-cont-box" style={{
                         margin: "auto",
@@ -49,18 +73,34 @@ function AnnounceModal(props) {
                             paddingTop: "20px",
                             marginRight: "auto",
 
-                            fontSize : "14px"
+                            fontSize: "14px"
                         }}>
                             작성일 : {props.pageAnnounceList[props.anModalNum].REGR_DTTM}
                         </p>
+
+                        { props.userInfo.USER_ROLE >= 2 ? <Button variant='danger' style={{
+                            marginRight: "10px",
+                            width: "70px",
+                            height: "40px",
+                        }}
+                            onClick={function () {
+                                axios.post("/api/announce/delete", {
+                                    postNumber : props.pageAnnounceList[props.anModalNum].AN_ID
+                                }
+                                ).then(function(result) {
+                                    alert('공지가 삭제되었습니다.')
+                                    window.location.replace("/main")
+                                })
+                            }}
+                        >삭제</Button> : null}
                         <Button variant='secondary' style={{
                             marginRight: "50px",
                             width: "70px",
                             height: "40px",
                         }}
-                        onClick={function() {
-                            props.setShowModal(false)
-                        }}
+                            onClick={function () {
+                                props.setShowModal(false)
+                            }}
                         >닫기</Button>
                     </div>
 
