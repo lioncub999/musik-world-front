@@ -1,22 +1,19 @@
-//1 - 10, 3 - 5. 5 - 3. 10 - 2, 20 - 1
-// "1" idx = 0, 3, 5, 7, 9, 11, 13, 15, 17, 19
-// "3" idx = 1, 4, 10, 14, 18
-// "5" idx = 2, 8, 12
-// "10" idx = 6, 16
-// "20" idx = 21
+//1 - 10, 3 - 4. 5 - 3. 10 - 2, 20 - 1
+// "1" idx = 0, 2, 4, 6, 8, 10, 12, 14, 16, 18
+// "3" idx = 3, 9, 13, 17
+// "5" idx = 1, 7, 11
+// "10" idx = 5, 15
+// "20" idx = 19
 // 돌림판 구성
+
+//resting, dancing, laughing, shoked
 
 let rulletData =
     [
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
-        },
-        {
-            text: "3",
-            color: "#31B404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "5",
@@ -26,7 +23,7 @@ let rulletData =
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "3",
@@ -36,17 +33,17 @@ let rulletData =
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "10",
             color: "#5F04B4",
-            reaction: "dancing"
+            reaction: "shoked"
         },
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "5",
@@ -56,7 +53,7 @@ let rulletData =
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "3",
@@ -66,7 +63,7 @@ let rulletData =
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "5",
@@ -76,7 +73,7 @@ let rulletData =
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "3",
@@ -86,17 +83,17 @@ let rulletData =
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "10",
             color: "#5F04B4",
-            reaction: "dancing"
+            reaction: "shoked"
         },
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "3",
@@ -106,12 +103,12 @@ let rulletData =
         {
             text: "1",
             color: "#AEB404",
-            reaction: "dancing"
+            reaction: "laughing"
         },
         {
             text: "20",
             color: "#B404AE",
-            reaction: "dancing"
+            reaction: "shoked"
         }
     ]
 

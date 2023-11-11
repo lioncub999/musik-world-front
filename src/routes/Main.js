@@ -15,14 +15,14 @@ function Main() {
     const [contentsNum, setContentsNum] = useState(0);
 
     useEffect(() => {
-        axios.get('/api/userinfo')
+        axios.post('/api/userinfo')
         .then((res) =>
             setUserInfo(res.data[0])
         )
         .catch((err) => {
             console.log(err)
         })
-    }, [])
+    }, [contentsNum])
 
     return (
         <div className='main-page'>
