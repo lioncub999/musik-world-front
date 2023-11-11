@@ -2,20 +2,22 @@ import { useEffect, useState } from 'react'
 import '../../css/main/Home.css'
 import axios from 'axios'
 import HomeAnnounce from './components/HomeAnnounce'
+import AnnounceModal from './AnnounceModal'
 
 function Homecontents(props) {
 
-    const [totalAnnounce, setTotalAnnounce] = useState(0)
-    const [announceList, setAnnounceList] = useState([])
+    const [homeAnnounceList, setHomeAnnounceList] = useState([])
+
+    const [anModalNum, setAnModalNum] = useState(0)
+    const [showModal, setShowModal] = useState(false)
 
     useEffect(() => {
         axios.post('/api/announce/paging', {
             selectRangeStart: 1,
-            selectRangeEnd: 999999
+            selectRangeEnd: 5
         })
             .then((result) => {
-                setAnnounceList(result.data)
-                setTotalAnnounce(result.data.length)
+                setHomeAnnounceList(result.data)
             })
 
     }, [])
@@ -23,6 +25,12 @@ function Homecontents(props) {
     if (props.userInfo.USER_NM != ('' || null)) {
         return (
             <div className="contents">
+                { showModal ? <AnnounceModal
+                pageAnnounceList={homeAnnounceList}
+                anModalNum={anModalNum}
+                setShowModal={setShowModal}
+                ></AnnounceModal> : null}
+               
                 <div className="title-box">
                     <div className="title">
                         HOME
@@ -41,7 +49,11 @@ function Homecontents(props) {
                             <p className="home-etc-title">
                                 공지
                             </p>
-                            <HomeAnnounce announceList={announceList} setContentsNum={props.setContentsNum}></HomeAnnounce>
+                            <HomeAnnounce
+                                homeAnnounceList={homeAnnounceList}
+                                setAnModalNum={setAnModalNum}
+                                setShowModal={setShowModal}
+                            ></HomeAnnounce>
                         </div>
 
                         <div className="home-etc-box" style={{

@@ -1,5 +1,3 @@
-import axios from "axios";
-
 function AnnounceTable(props) {
 
         return (
@@ -36,27 +34,26 @@ function AnnounceTable(props) {
                         </thead>
                         <tbody>
                             {
-                                props.announceList.map(function (a, i) {
+                                props.pageAnnounceList.map(function (a, i) {
                                     return (
                                         <tr style={{
                                             borderBottom: "1px solid black",
                                             height: "40px"
                                         }} key={i}>
-                                            <td>{props.announceList[i].AN_ID}</td>
+                                            <td>{props.pageAnnounceList[i].AN_ID}</td>
                                             <td style={{ 
                                                 textAlign: "left",
                                                 cursor : "pointer"
                                                 }}
                                                 className="announce-title"
                                                 onClick={function() {
-                                                    axios.post('/api/announce/showAnContents', {
-                                                        announceId : {i}
-                                                    })
+                                                    props.setShowModal(true)
+                                                    props.setAnModalNum(i)
                                                 }}
-                                                >{props.announceList[i].AN_TITLE}</td>
-                                            <td>{props.announceList[i].REGR_DTTM}</td>
-                                            <td>{props.announceList[i].CHGR_DTTM}</td>
-                                            <td>{props.announceList[i].REGR_ID}</td>
+                                                >{props.pageAnnounceList[i].AN_TITLE}</td>
+                                            <td>{props.pageAnnounceList[i].REGR_DTTM}</td>
+                                            <td>{props.pageAnnounceList[i].CHGR_DTTM}</td>
+                                            <td>{props.pageAnnounceList[i].REGR_ID}</td>
                                         </tr>
                                     )
                                 })

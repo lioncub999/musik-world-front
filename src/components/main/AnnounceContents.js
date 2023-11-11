@@ -7,17 +7,44 @@ import AnnounceModal from "./AnnounceModal";
 
 function AnnounceContents() {
 
-    const [announceList, setAnnounceList] = useState([])
+    const [pageAnnounceList, setPageAnnounceList] = useState([])
 
-    const [totalAnnounce, setTotalAnnounce] = useState(0)
+    const [totalAnnounceCnt, setTotalAnnounceCnt] = useState(0)
     const [selectRangeStart, setSelectRangeStart] = useState(1)
     const [selectRangeEnd, setSelectRangeEnd] = useState(10)
+
+    const [anModalNum, setAnModalNum] = useState(0)
 
     const [pageActive, setPageActive] = useState(1)
 
     let items = [];
 
-    for (let number = 1; number <= Math.ceil(totalAnnounce / 10); number++) {
+    const [showModal, setShowModal] = useState(false);
+
+    const modalESC = () => {
+        // your logic here
+        setShowModal(false)
+    };
+
+    useEffect(() => {
+        const keyDownHandler = event => {
+            if (event.key === 'Escape') {
+                event.preventDefault();
+
+                // 👇️ your logic here
+                modalESC();
+            }
+        };
+
+        document.addEventListener('keydown', keyDownHandler);
+
+        return () => {
+            document.removeEventListener('keydown', keyDownHandler);
+        };
+    }, []);
+
+
+    for (let number = 1; number <= Math.ceil(totalAnnounceCnt / 10); number++) {
         items.push(
             <Pagination.Item key={number} active={number === pageActive} onClick={function () {
                 setPageActive(number)
@@ -34,10 +61,10 @@ function AnnounceContents() {
         axios.get('/api/announce', {
         })
             .then((result) => {
-                setTotalAnnounce(result.data[0].TOTAL_ANNOUNCE)
+                setTotalAnnounceCnt(result.data.length)
             })
 
-    }, [])
+    }, [pageActive])
 
     useEffect(() => {
         axios.post('/api/announce/paging', {
@@ -45,17 +72,21 @@ function AnnounceContents() {
             selectRangeEnd: selectRangeEnd
         })
             .then((result) => {
-                setAnnounceList(result.data)
-                console.log(result.data)
+                setPageAnnounceList(result.data)
+                console.log(pageAnnounceList)
             })
 
     }, [pageActive])
 
-    if (announceList.length > 0 && totalAnnounce > 0) {
+    if (pageAnnounceList.length > 0 && totalAnnounceCnt > 0) {
         return (
             <>
-                <AnnounceModal></AnnounceModal>
-                <div className="contents" style={{zIndex : "-1"}}>
+                {showModal ? <AnnounceModal 
+                setShowModal={setShowModal}
+                anModalNum = {anModalNum}
+                pageAnnounceList = {pageAnnounceList}
+                ></AnnounceModal> : null}
+                <div className="contents" style={{ zIndex: "1" }}>
                     <div className="title-box">
                         <div className="title">
                             ANNOUNCE
@@ -67,10 +98,13 @@ function AnnounceContents() {
                     <div className="announce-box" style={{
                         textAlign: "center"
                     }}>
-                        <div className="create-announce" style={{ textAlign: "center" }}>
+                        <div className="create-announce" style={{ textAlign: "left" }}>
                             <Button>글쓰기</Button>
                         </div>
-                        <AnnounceTable announceList={announceList}></AnnounceTable>
+                        <AnnounceTable
+                            pageAnnounceList={pageAnnounceList}
+                            setShowModal={setShowModal}
+                            setAnModalNum={setAnModalNum}></AnnounceTable>
                         <Pagination style={{ justifyContent: "center" }}>{items}</Pagination>
                     </div>
 
