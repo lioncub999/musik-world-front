@@ -20,7 +20,7 @@ function Homecontents(props) {
                 setHomeAnnounceList(result.data)
             })
 
-    }, [])
+    }, [showModal])
 
     if (props.userInfo.USER_NM != ('' || null)) {
         return (
