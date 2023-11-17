@@ -1,9 +1,12 @@
 import { Button } from 'react-bootstrap'
 import '../../../../css/main/AnnounceModal.css'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function AnnounceModal(props) {
+    const [modifyCont, setModifyCont] = useState(props.pageAnnounceList[props.anModalNum].AN_CONT)
+    const [modifyTitle, setmodifyTitle] = useState()
+    const [isModify, setIsModify] = useState(false)
 
     const modalESC = () => {
         // your logic here
@@ -55,12 +58,33 @@ function AnnounceModal(props) {
                         borderRadius: "15px",
                         overflow: "auto",
                     }}>
-                        <div className="annoucne-cont" style={{
-                            textAlign: "left",
-                            padding: "20px"
-                        }}>
-                            {props.pageAnnounceList[props.anModalNum].AN_CONT}
-                        </div>
+
+                        {
+                            isModify
+                                ?
+                                <textarea name="modifyAnnounceCont" id="modifyAnnounceCont" cols="30" rows="10" className='modifyCont'
+                                    style={{
+                                        width: "100%",
+                                        height: "98%",
+                                        resize: "none",
+                                        padding: "20px",
+                                        background: "none",
+                                        border: "none"
+                                    }}
+                                    defaultValue={modifyCont}
+                                    onChange={function (e) {
+                                        setModifyCont(e.target.value)
+                                    }}
+                                ></textarea>
+                                :
+                                <div className="annoucne-cont" style={{
+                                    textAlign: "left",
+                                    padding: "20px"
+                                }}>
+                                    {props.pageAnnounceList[props.anModalNum].AN_CONT}
+                                </div>
+                        }
+
                     </div>
 
                     <div style={{
@@ -78,21 +102,47 @@ function AnnounceModal(props) {
                             작성일 : {props.pageAnnounceList[props.anModalNum].REGR_DTTM}
                         </p>
 
-                        { props.userInfo.USER_ROLE >= 2 ? <Button variant='danger' style={{
-                            marginRight: "10px",
-                            width: "70px",
-                            height: "40px",
-                        }}
-                            onClick={function () {
-                                axios.post("/api/announce/delete", {
-                                    postNumber : props.pageAnnounceList[props.anModalNum].AN_ID
+                        {props.userInfo.USER_ROLE >= 2 ?
+                            <>
+                                <Button variant='danger' style={{
+                                    marginRight: "10px",
+                                    width: "70px",
+                                    height: "40px",
+                                }}
+                                    onClick={function () {
+                                        axios.post("/api/announce/delete", {
+                                            postNumber: props.pageAnnounceList[props.anModalNum].AN_ID
+                                        }
+                                        ).then(function (result) {
+                                            alert('공지가 삭제되었습니다.')
+                                            window.location.replace("/main")
+                                        })
+                                    }}
+                                >삭제</Button>
+                                {
+                                    isModify
+                                        ?
+                                        <Button variant='primary' style={{
+                                            marginRight: "10px",
+                                            width: "70px",
+                                            height: "40px",
+                                        }}
+                                            onClick={function () {
+                                                setIsModify(false)
+                                            }}
+                                        >저장</Button>
+                                        :
+                                        <Button variant='primary' style={{
+                                            marginRight: "10px",
+                                            width: "70px",
+                                            height: "40px",
+                                        }}
+                                            onClick={function () {
+                                                setIsModify(true)
+                                            }}
+                                        >수정</Button>
                                 }
-                                ).then(function(result) {
-                                    alert('공지가 삭제되었습니다.')
-                                    window.location.replace("/main")
-                                })
-                            }}
-                        >삭제</Button> : null}
+                            </> : null}
                         <Button variant='secondary' style={{
                             marginRight: "50px",
                             width: "70px",

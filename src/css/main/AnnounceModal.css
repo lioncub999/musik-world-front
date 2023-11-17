@@ -18,3 +18,7 @@
     background : #F9FAFC;
     border-radius: 15px;
 }
+
+.modifyCont:focus {
+    outline: none;
+}
