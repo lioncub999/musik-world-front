@@ -5,7 +5,7 @@ import axios from 'axios';
 
 function AnnounceModal(props) {
     const [modifyCont, setModifyCont] = useState(props.pageAnnounceList[props.anModalNum].AN_CONT)
-    const [modifyTitle, setmodifyTitle] = useState()
+    const [modifyTitle, setmodifyTitle] = useState(props.pageAnnounceList[props.anModalNum].AN_TITLE)
     const [isModify, setIsModify] = useState(false)
 
     const modalESC = () => {
@@ -38,13 +38,38 @@ function AnnounceModal(props) {
                 e.stopPropagation()
             }}>
                 <div className="announce-num">
-                    <h5 style={{
-                        textAlign: "left",
-                        height: "80px",
-                        lineHeight: "80px",
-                        paddingLeft: "50px",
-                        margin: "0px"
-                    }}>글 제목 : {props.pageAnnounceList[props.anModalNum].AN_TITLE}</h5>
+                    {
+                        isModify
+                            ?
+                            <h5 style={{
+                                textAlign: "left",
+                                height: "80px",
+                                lineHeight: "80px",
+                                paddingLeft: "50px",
+                                margin: "0px",
+                            }}>글 제목 : <input style={{
+                                textAlign: "left",
+                                height: "40px",
+                                paddingLeft: "10px"
+
+                            }}
+                                defaultValue={modifyTitle}
+                                onChange={function (e) {
+                                    setmodifyTitle(e.target.value)
+                                }}
+                                /></h5>
+
+                            :
+                            <h5 style={{
+                                textAlign: "left",
+                                height: "80px",
+                                lineHeight: "80px",
+                                paddingLeft: "50px",
+                                margin: "0px",
+                                clear: "both"
+                            }}>글 제목 : {props.pageAnnounceList[props.anModalNum].AN_TITLE}</h5>
+                    }
+
                     <h5 style={{
                         textAlign: "left",
                         paddingLeft: "50px",
@@ -128,7 +153,14 @@ function AnnounceModal(props) {
                                             height: "40px",
                                         }}
                                             onClick={function () {
-                                                setIsModify(false)
+                                                props.setShowModal(false)
+                                                axios.post('/api/announce/modify', {
+                                                    modifyTitle: modifyTitle
+                                                    , modifyCont: modifyCont
+                                                    , modifyNum : props.pageAnnounceList[props.anModalNum].AN_ID
+                                                }).then(function (result) {
+                                                    console.log('공지 수정 완료')
+                                                })
                                             }}
                                         >저장</Button>
                                         :
@@ -148,9 +180,11 @@ function AnnounceModal(props) {
                             width: "70px",
                             height: "40px",
                         }}
-                            onClick={function () {
+                            onClick={
+                                function () {
                                 props.setShowModal(false)
-                            }}
+                            }
+                        }
                         >닫기</Button>
                     </div>
 
