@@ -1,4 +1,4 @@
-import { Button } from 'react-bootstrap'
+import { Button, Col, Row, Toast } from 'react-bootstrap'
 import '../../../../css/main/AnnounceModal.css'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -29,15 +29,15 @@ function AnnounceModal(props) {
             document.removeEventListener('keydown', keyDownHandler);
         };
     }, []);
-
     return (
         <div className="announce-modal-box" onClick={function () {
             props.setShowModal(false)
         }}>
-            <div className="announce-modal" onClick={function (e) {
-                e.stopPropagation()
-            }}>
-                <div className="announce-num">
+
+
+                <div className="announce-num" onClick={function(e) {
+                    e.stopPropagation()
+                }}>
                     {
                         isModify
                             ?
@@ -50,7 +50,10 @@ function AnnounceModal(props) {
                             }}>글 제목 : <input style={{
                                 textAlign: "left",
                                 height: "40px",
-                                paddingLeft: "10px"
+                                paddingLeft: "10px",
+                                border: "3px solid blue",
+                                borderRadius: "10px",
+                                width: "600px"
 
                             }}
                                 defaultValue={modifyTitle}
@@ -67,7 +70,7 @@ function AnnounceModal(props) {
                                 paddingLeft: "50px",
                                 margin: "0px",
                                 clear: "both"
-                            }}>글 제목 : {props.pageAnnounceList[props.anModalNum].AN_TITLE}</h5>
+                            }}>글 제목 : {modifyTitle}</h5>
                     }
 
                     <h5 style={{
@@ -75,18 +78,18 @@ function AnnounceModal(props) {
                         paddingLeft: "50px",
                         height: "40px"
                     }}>작성자 : {props.pageAnnounceList[props.anModalNum].REGR_ID}</h5>
-                    <div className="announce-cont-box" style={{
-                        margin: "auto",
-                        width: "90%",
-                        height: "500px",
-                        border: "2px solid black",
-                        borderRadius: "15px",
-                        overflow: "auto",
-                    }}>
 
-                        {
-                            isModify
-                                ?
+                    {
+                        isModify
+                            ?
+                            <div className="announce-cont-box" style={{
+                                margin: "auto",
+                                width: "90%",
+                                height: "500px",
+                                border: "3px solid blue",
+                                borderRadius: "15px",
+                                overflow: "auto",
+                            }}>
                                 <textarea name="modifyAnnounceCont" id="modifyAnnounceCont" cols="30" rows="10" className='modifyCont'
                                     style={{
                                         width: "100%",
@@ -101,16 +104,24 @@ function AnnounceModal(props) {
                                         setModifyCont(e.target.value)
                                     }}
                                 ></textarea>
-                                :
+                            </div>
+                            :
+                            <div className="announce-cont-box" style={{
+                                margin: "auto",
+                                width: "90%",
+                                height: "500px",
+                                border: "2px solid black",
+                                borderRadius: "15px",
+                                overflow: "auto",
+                            }}>
                                 <div className="annoucne-cont" style={{
                                     textAlign: "left",
                                     padding: "20px"
                                 }}>
-                                    {props.pageAnnounceList[props.anModalNum].AN_CONT}
+                                    {modifyCont}
                                 </div>
-                        }
-
-                    </div>
+                            </div>
+                    }
 
                     <div style={{
                         display: "flex",
@@ -139,8 +150,8 @@ function AnnounceModal(props) {
                                             postNumber: props.pageAnnounceList[props.anModalNum].AN_ID
                                         }
                                         ).then(function (result) {
-                                            alert('공지가 삭제되었습니다.')
-                                            window.location.replace("/main")
+                                            props.setShowDeleteToast(true)
+                                            props.setShowModal(false)
                                         })
                                     }}
                                 >삭제</Button>
@@ -153,13 +164,13 @@ function AnnounceModal(props) {
                                             height: "40px",
                                         }}
                                             onClick={function () {
-                                                props.setShowModal(false)
                                                 axios.post('/api/announce/modify', {
                                                     modifyTitle: modifyTitle
                                                     , modifyCont: modifyCont
-                                                    , modifyNum : props.pageAnnounceList[props.anModalNum].AN_ID
+                                                    , modifyNum: props.pageAnnounceList[props.anModalNum].AN_ID
                                                 }).then(function (result) {
-                                                    console.log('공지 수정 완료')
+                                                    setIsModify(false)
+                                                    props.setShowSucsessToast(true)
                                                 })
                                             }}
                                         >저장</Button>
@@ -182,15 +193,15 @@ function AnnounceModal(props) {
                         }}
                             onClick={
                                 function () {
-                                props.setShowModal(false)
+                                    props.setShowModal(false)
+                                }
                             }
-                        }
                         >닫기</Button>
                     </div>
 
 
                 </div>
-            </div>
+
         </div>
     )
 }
