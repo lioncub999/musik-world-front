@@ -49,7 +49,7 @@ function AnnounceContents(props) {
                 setTotalAnnounceCnt(result.data.length)
             })
 
-    }, [pageActive])
+    }, [pageActive, showModal, anNewPage])
 
     useEffect(() => {
         axios.post('/api/announce/paging', {
@@ -96,6 +96,7 @@ function AnnounceContents(props) {
                         </Toast>
                     </Col>
                 </Row>
+
                 {showModal ? <AnnounceModal
                     setShowModal={setShowModal}
                     anModalNum={anModalNum}
@@ -104,6 +105,7 @@ function AnnounceContents(props) {
                     setShowSucsessToast={setShowSucsessToast}
                     setShowDeleteToast={setShowDeleteToast}
                 ></AnnounceModal> : null}
+                
                 <div className="contents" style={{ zIndex: "1" }}>
                     <div className="title-box">
                         <div className="title">

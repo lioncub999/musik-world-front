@@ -27,6 +27,8 @@ function Homecontents(props) {
     const [showDeleteToast, setShowDeleteToast] = useState(false);
     if (props.userInfo.USER_NM != ('' || null)) {
         return (
+
+
             <>
                 <Row style={{
                     position: "absolute",

@@ -2,10 +2,10 @@ import axios from "axios";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
 
-function AnnounceNew(props) {
+function BoardNew(props) {
 
-    const [announceTitle, setAnnounceTitle] = useState()
-    const [announceContent, setAnnounceContent] = useState()
+    const [boardTitle, setBoardTitle] = useState()
+    const [boardContent, setBoardContent] = useState()
     const [regrId, setregrId] = useState(props.userInfo.USER_NM)
     return (
         <div>
@@ -17,10 +17,10 @@ function AnnounceNew(props) {
                     marginBottom: "20px",
                     fontSize: "26px",
 
-                }}>글 제목 : <input type="text" name="announceTitle" style={{ width: "50%", borderRadius: "10px" }} onChange={function (e) { setAnnounceTitle(e.target.value) }} /></div>
+                }}>글 제목 : <input type="text" name="boardTitle" style={{ width: "50%", borderRadius: "10px" }} onChange={function (e) { setBoardTitle(e.target.value) }} /></div>
                 <div style={{ width: "80%", margin: "auto" }}>
                     <div style={{ textAlign: "left", fontSize: "20px" }}>글내용</div>
-                    <div><textarea type="text" onChange={function (e) { setAnnounceContent(e.target.value) }} name="announceContent" style={{
+                    <div><textarea type="text" onChange={function (e) { setBoardContent(e.target.value) }} name="boardContent" style={{
                         width: "100%",
                         height: "400px",
                         borderRadius: "15px",
@@ -34,13 +34,13 @@ function AnnounceNew(props) {
                     textAlign: "right"
                 }}>
                     <Button onClick={function () {
-                        axios.post("/api/announce/new", {
-                            announceTitle: announceTitle,
-                            announceContent: announceContent,
+                        axios.post("/api/board/new", {
+                            boardTitle: boardTitle,
+                            boardContent: boardContent,
                             regrId: regrId
                         })
                             .then(function (result) {
-                                props.setAnNewPage(false)
+                                props.setBoNewPage(false)
                                 props.setShowSucsessToast(true)
                             })
                     }}>글작성</Button>
@@ -50,4 +50,4 @@ function AnnounceNew(props) {
     )
 }
 
-export default AnnounceNew;
+export default BoardNew;

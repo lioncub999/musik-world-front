@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../../css/main/Sidenavbar.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse, faBullhorn, faClipboard, faGamepad, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faBullhorn, faClipboard, faGamepad, faUser, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 function Sidenavbar(props) {
     const sidebarMenu = ['홈', '공지', '게시판', '룰렛', '마이페이지']
@@ -52,7 +52,7 @@ function Sidenavbar(props) {
 
                     <div className="logout-btn" onClick={() => { window.location.href = '/api/auth/logout' }}>
                         <div className="logout-text">
-                            Logout
+                        <FontAwesomeIcon icon={faRightFromBracket} /> Logout
                         </div>
                     </div>
                 </div>
